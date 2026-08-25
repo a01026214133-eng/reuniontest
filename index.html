@@ -25,23 +25,8 @@
 html { scroll-behavior: smooth; }
 
 
-/* 모바일 배경 최적화 - 할머니(오른쪽하단) 보이도록 */
-@media (max-width: 768px) {
-  body::before {
-    background-position: right bottom;
-    background-size: auto 60vh;
-  }
-}
-body {
-  font-family: 'Noto Sans KR', sans-serif;
-  background: var(--hanji);
-  color: var(--ink);
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
+/* 모바일 배경 최적화 */
 
-/* 배경 이미지 */
 body::before {
   content: '';
   position: fixed;
@@ -55,6 +40,23 @@ body::before {
   pointer-events: none;
 }
 
+/* 모바일 배경 최적화 */
+@media (max-width: 768px) {
+  body::before {
+    background-size: 250%;
+    background-position: right bottom;
+  }
+}
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--hanji);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 배경 이미지 */
 /* === 창살 프레임 (전통 격자 패턴) === */
 .frame-svg {
   position: fixed;
