@@ -614,21 +614,17 @@ body {
   margin: 0 auto 32px;
 }
 
-.result-title {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 20px;
-}
+/* result-title → 위 === 결과 텍스트 위계 === 섹션에서 정의됨 */
 
 .result-desc {
   font-size: 15px;
   color: var(--ink);
-  line-height: 2.1;
+  line-height: 2.0;
   margin-bottom: 36px;
-  font-weight: 700;
-  white-space: pre-line;
+  font-weight: 400;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-align: left;
 }
 
 .result-tips-box {
@@ -664,7 +660,9 @@ body {
   font-size: 14px;
   color: var(--ink);
   line-height: 1.9;
-  font-weight: 700;
+  font-weight: 400;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .tip-item:last-child { margin-bottom: 0; }
@@ -695,6 +693,68 @@ body {
   background: var(--red);
   border-color: var(--red);
   color: var(--hanji);
+}
+
+/* === 결과 텍스트 위계 === */
+.result-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+/* 본문 strong: 핵심 단어만 볼드 */
+.result-desc strong,
+#result-good strong,
+#result-bad strong,
+#tips-list strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* 결과 박스 소제목(tips-label) 위계 */
+.tips-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  margin-bottom: 12px;
+  margin-top: 4px;
+}
+
+/* 결과 박스 내부 문단 간격 */
+#result-good,
+#result-bad {
+  margin-bottom: 24px;
+}
+
+/* 모바일 결과 페이지 여백 최적화 */
+@media (max-width: 480px) {
+  .result-pct {
+    font-size: 60px;
+    margin-bottom: 24px;
+  }
+  .result-title {
+    font-size: 19px;
+    margin-bottom: 14px;
+  }
+  .result-desc {
+    font-size: 14px;
+    line-height: 1.95;
+    margin-bottom: 28px;
+  }
+  .result-tips-box {
+    padding: 22px 18px;
+    margin-bottom: 28px;
+  }
+  #result-good,
+  #result-bad,
+  #tips-list p {
+    font-size: 13px;
+    line-height: 1.95;
+  }
 }
 
 /* 모바일 배경 최적화 */
@@ -836,9 +896,9 @@ body {
 
     <div class="result-tips-box">
       <p class="tips-label">✓ 잘한 점</p>
-      <p id="result-good" style="font-size:14px;color:var(--ink);line-height:1.9;font-weight:700;margin-bottom:20px;"></p>
+      <p id="result-good" style="font-size:14px;color:var(--ink);line-height:2.0;font-weight:400;margin-bottom:20px;word-break:keep-all;overflow-wrap:break-word;"></p>
       <p class="tips-label" style="color:var(--red);">△ 아쉬운 점</p>
-      <p id="result-bad" style="font-size:14px;color:var(--ink);line-height:1.9;font-weight:700;margin-bottom:20px;"></p>
+      <p id="result-bad" style="font-size:14px;color:var(--ink);line-height:2.0;font-weight:400;margin-bottom:20px;word-break:keep-all;overflow-wrap:break-word;"></p>
       <p class="tips-label" style="color:var(--blue);">→ 앞으로의 행동이 중요해요</p>
       <div id="tips-list"></div>
     </div>
@@ -997,42 +1057,42 @@ const results = [
   {
     range: [50, 60],
     title: "아직 끝이라고 단정 짓기는 일러요",
-    desc: "지금 두 사람은 다시 이어질 가능성과 그대로 멀어질 가능성이 함께 존재하는 상태예요. 작은 행동 하나가 관계의 방향을 바꿀 수도 있는 만큼, 지금은 조급하게 상대를 붙잡기보다 천천히 상황을 지켜보는 게 중요해요. 아직 두 사람 사이의 인연이 완전히 끊어진 것은 아니니까요.",
-    good: "헤어진 뒤 상대에게 자신의 마음을 어느 정도 전달했거나, 관계를 다시 돌아볼 수 있는 여지를 남긴 점은 좋아요. 특히 감정적으로 관계를 완전히 끊어버리지 않았다면 다시 대화할 가능성은 남아 있어요.",
-    bad: "다만 불안한 마음 때문에 상대의 반응을 지나치게 확인하거나, 너무 빠르게 재회를 시도했다면 오히려 상대에게 부담으로 느껴졌을 수 있어요. 지금은 무언가를 더 하는 것보다 하지 않는 것이 필요한 순간일 수도 있어요.",
-    tips: "앞으로의 행동에 따라 가장 크게 달라질 수 있는 구간이에요. 당장의 답을 얻으려고 하기보다 상대에게 생각할 시간을 주고, 이별의 원인이 무엇이었는지부터 차분히 돌아보세요. 지금부터의 선택이 두 사람의 인연을 다시 이어지게 할 수도, 완전히 멀어지게 할 수도 있어요."
+    desc: "지금 두 사람은 <strong>다시 이어질 가능성과 그대로 멀어질 가능성이 함께 존재하는 상태</strong>예요.<br><br>작은 행동 하나가 관계의 방향을 바꿀 수도 있는 만큼,<br>지금은 <strong>조급하게 상대를 붙잡기보다 천천히 상황을 지켜보는 게 중요</strong>해요.<br><br>아직 두 사람 사이의 인연이 완전히 끊어진 것은 아니니까요.",
+    good: "헤어진 뒤 상대에게 자신의 마음을 어느 정도 전달했거나,<br><strong>관계를 다시 돌아볼 수 있는 여지를 남긴 점</strong>은 좋아요.<br><br>특히 감정적으로 관계를 완전히 끊어버리지 않았다면<br>다시 대화할 가능성은 남아 있어요.",
+    bad: "불안한 마음 때문에 상대의 반응을 <strong>지나치게 확인하거나<br>너무 빠르게 재회를 시도</strong>했다면,<br>오히려 상대에게 부담으로 느껴졌을 수 있어요.<br><br>지금은 무언가를 더 하는 것보다<br><strong>하지 않는 것이 필요한 순간</strong>일 수도 있어요.",
+    tips: "앞으로의 행동에 따라 <strong>가장 크게 달라질 수 있는 구간</strong>이에요.<br><br>당장의 답을 얻으려 하기보다 상대에게 생각할 시간을 주고,<br><strong>이별의 원인이 무엇이었는지부터 차분히 돌아보세요.</strong><br><br>지금부터의 선택이 두 사람의 인연을<br>다시 이어지게 할 수도, 완전히 멀어지게 할 수도 있어요."
   },
   {
     range: [61, 70],
     title: "다시 이어질 여지가 남아 있어요",
-    desc: "두 사람의 관계에는 아직 서로에게 남아 있는 감정과 미련이 보여요. 당장은 상대의 마음을 확인하기 어렵더라도, 적절한 거리와 시간이 오히려 다시 서로를 생각하게 만들 수 있어요. 지금은 남아 있는 인연의 끈을 조급하게 당기지 않는 것이 중요해요.",
-    good: "상대와의 관계를 완전히 단절시키기보다 다시 대화할 수 있는 여지를 남겨둔 행동들이 긍정적으로 작용하고 있어요. 헤어진 뒤 스스로를 돌아보려 했던 것도 재회 가능성을 높이는 요소예요.",
-    bad: "아직 상대의 마음보다 자신의 간절함이 앞서 있는 부분이 보여요. 상대의 반응 하나하나에 의미를 부여하거나 연락을 기다리는 모습을 계속 보이면 관계의 균형이 무너질 수 있어요.",
-    tips: "지금은 인연의 끈을 억지로 잡아당기지 않는 것이 중요해요. 상대가 먼저 당신을 궁금해하고 생각할 수 있는 시간을 만들어주세요. 남아 있는 감정을 잘 지켜낸다면 다시 대화할 계기가 생길 가능성은 충분해요."
+    desc: "두 사람의 관계에는 아직<br><strong>서로에게 남아 있는 감정과 미련</strong>이 보여요.<br><br>당장은 상대의 마음을 확인하기 어렵더라도,<br><strong>적절한 거리와 시간</strong>이 오히려 다시 서로를 생각하게 만들 수 있어요.<br><br>지금은 남아 있는 인연의 끈을<br><strong>조급하게 당기지 않는 것</strong>이 중요해요.",
+    good: "상대와의 관계를 완전히 단절시키기보다<br><strong>다시 대화할 수 있는 여지를 남겨둔 행동들</strong>이<br>긍정적으로 작용하고 있어요.<br><br>헤어진 뒤 스스로를 돌아보려 했던 것도<br>재회 가능성을 높이는 요소예요.",
+    bad: "아직 상대의 마음보다<br><strong>자신의 간절함이 앞서 있는 부분</strong>이 보여요.<br><br>상대의 반응 하나하나에 의미를 부여하거나<br>연락을 기다리는 모습을 계속 보이면<br><strong>관계의 균형이 무너질 수 있어요.</strong>",
+    tips: "지금은 <strong>인연의 끈을 억지로 잡아당기지 않는 것</strong>이 중요해요.<br><br>상대가 먼저 당신을 궁금해하고<br>생각할 수 있는 시간을 만들어주세요.<br><br>남아 있는 감정을 잘 지켜낸다면<br><strong>다시 대화할 계기</strong>가 생길 가능성은 충분해요."
   },
   {
     range: [71, 80],
     title: "아직 서로의 마음에 남아 있는 인연이에요",
-    desc: "헤어졌다고 해서 두 사람의 감정까지 완전히 정리된 것은 아닌 것 같아요. 서로를 다시 떠올리거나 아쉬움을 느끼게 될 가능성이 비교적 높은 관계예요. 지금 어떻게 행동하느냐에 따라 다시 연락이 닿거나 관계가 이어질 여지가 충분히 있어요.",
-    good: "헤어진 뒤에도 관계를 돌이킬 수 없을 정도로 망가뜨리지 않았고, 상대에게 좋은 기억으로 남을 만한 부분이 충분히 있어요. 특히 감정이 격해진 뒤 한발 물러났다면 좋은 선택이었어요.",
-    bad: "'아직 마음이 있으니까 다시 만나겠지'라고 생각해 너무 빨리 움직이는 건 위험해요. 감정이 남아 있다는 것과 다시 연애할 준비가 되어 있다는 것은 다른 문제니까요.",
-    tips: "지금부터는 재회를 설득하기보다 상대가 다시 만나고 싶다고 느낄 이유를 만드는 것이 중요해요. 이별 당시의 문제를 반복하지 않을 것이라는 변화가 보여야 해요. 잘만 흘러간다면 자연스럽게 다시 연락이 닿을 가능성이 높은 관계예요."
+    desc: "헤어졌다고 해서<br><strong>두 사람의 감정까지 완전히 정리된 것은 아닌 것 같아요.</strong><br><br>서로를 다시 떠올리거나 아쉬움을 느끼게 될 가능성이<br>비교적 높은 관계예요.<br><br>지금 <strong>어떻게 행동하느냐에 따라</strong><br>다시 연락이 닿거나 관계가 이어질 여지가 충분히 있어요.",
+    good: "헤어진 뒤에도 <strong>관계를 돌이킬 수 없을 정도로 망가뜨리지 않았고,</strong><br>상대에게 좋은 기억으로 남을 만한 부분이 충분히 있어요.<br><br>특히 감정이 격해진 뒤 한발 물러났다면<br>좋은 선택이었어요.",
+    bad: "'아직 마음이 있으니까 다시 만나겠지'라고 생각해<br><strong>너무 빨리 움직이는 건 위험</strong>해요.<br><br>감정이 남아 있다는 것과<br><strong>다시 연애할 준비가 되어 있다는 것은 다른 문제</strong>니까요.",
+    tips: "지금부터는 재회를 설득하기보다<br><strong>상대가 다시 만나고 싶다고 느낄 이유를 만드는 것</strong>이 중요해요.<br><br>이별 당시의 문제를 반복하지 않을 것이라는<br><strong>변화가 보여야</strong> 해요.<br><br>잘만 흘러간다면 자연스럽게 다시 연락이 닿을<br>가능성이 높은 관계예요."
   },
   {
     range: [81, 90],
     title: "다시 한번 이어질 가능성이 높은 인연이에요",
-    desc: "두 사람 사이에는 쉽게 사라지지 않는 감정과 연결점이 남아 있어요. 지금의 이별이 관계의 완전한 끝이라기보다 서로의 마음을 다시 확인하게 되는 과정이 될 수도 있어요. 성급하게 움직이지만 않는다면 다시 서로를 바라보게 될 가능성이 높아요.",
-    good: "두 사람 사이에 쌓인 좋은 기억과 정서적인 유대가 재회에 긍정적으로 작용하고 있어요. 헤어진 이후 상대에게 지나친 압박을 주지 않았다면 더욱 좋은 흐름이에요.",
-    bad: "가능성이 높다는 생각 때문에 조급하게 결과를 만들려고 하는 것이 가장 큰 변수예요. 지금 당장 관계를 정의하거나 상대에게 답을 요구하면 오히려 자연스럽게 돌아올 수 있는 흐름을 깨뜨릴 수 있어요.",
-    tips: "이 구간에서는 새로운 행동을 많이 하는 것보다 타이밍을 잘 잡는 것이 중요해요. 자연스럽게 연락할 수 있는 계기가 생겼을 때 가볍게 관계를 회복해보세요. 처음부터 '우리 다시 만나자'가 아니라 다시 편하게 이야기할 수 있는 사이가 되는 것이 먼저예요."
+    desc: "두 사람 사이에는<br><strong>쉽게 사라지지 않는 감정과 연결점</strong>이 남아 있어요.<br><br>지금의 이별이 관계의 완전한 끝이라기보다<br><strong>서로의 마음을 다시 확인하게 되는 과정</strong>이 될 수도 있어요.<br><br>성급하게 움직이지만 않는다면<br>다시 서로를 바라보게 될 가능성이 높아요.",
+    good: "두 사람 사이에 쌓인 <strong>좋은 기억과 정서적인 유대</strong>가<br>재회에 긍정적으로 작용하고 있어요.<br><br>헤어진 이후 <strong>상대에게 지나친 압박을 주지 않았다면</strong><br>더욱 좋은 흐름이에요.",
+    bad: "가능성이 높다는 생각 때문에<br><strong>조급하게 결과를 만들려고 하는 것이 가장 큰 변수</strong>예요.<br><br>지금 당장 관계를 정의하거나 상대에게 답을 요구하면,<br>오히려 자연스럽게 돌아올 수 있는 흐름을 깨뜨릴 수 있어요.",
+    tips: "이 구간에서는 새로운 행동을 많이 하는 것보다<br><strong>타이밍을 잘 잡는 것</strong>이 중요해요.<br><br>자연스럽게 연락할 수 있는 계기가 생겼을 때<br>가볍게 관계를 회복해보세요.<br><br>처음부터 '우리 다시 만나자'가 아니라<br><strong>다시 편하게 이야기할 수 있는 사이</strong>가 되는 것이 먼저예요."
   },
   {
     range: [91, 100],
     title: "쉽게 끝나지 않을 인연이에요",
-    desc: "두 사람은 헤어졌다고 해서 서로의 존재를 쉽게 지워버릴 수 있는 관계는 아닌 것 같아요. 감정과 미련, 다시 이어질 수 있는 여러 요소가 강하게 남아 있어요. 지금 당장 눈에 보이는 변화가 없더라도 다시 서로를 찾게 될 가능성이 매우 높은 편이에요.",
-    good: "두 사람 사이에는 단순한 미련만이 아니라 다시 관계를 회복할 수 있는 기반이 남아 있어요. 헤어진 뒤에도 상대의 감정을 존중하고 관계를 완전히 망가뜨리지 않은 선택들이 특히 긍정적으로 작용했어요.",
-    bad: "오히려 이 정도로 서로에게 감정이 남아 있을 때는 같은 문제로 다시 헤어지는 것을 조심해야 해요. 다시 만나는 것 자체보다 '이번에는 무엇이 달라질 것인가'가 더 중요한 관계예요.",
-    tips: "재회를 서두르기보다 두 사람이 헤어질 수밖에 없었던 원인을 먼저 해결해두세요. 다시 연락이 닿았을 때 예전 관계로 그대로 돌아가는 것이 아니라 조금 다른 관계를 시작한다는 마음으로 접근하는 것이 중요해요. 재회 가능성이 높은 만큼, 다시 만난 뒤의 관계를 지켜내는 것이 더 중요합니다."
+    desc: "두 사람은 헤어졌다고 해서<br><strong>서로의 존재를 쉽게 지워버릴 수 있는 관계는 아닌 것 같아요.</strong><br><br>감정과 미련, 다시 이어질 수 있는 여러 요소가<br><strong>강하게 남아 있어요.</strong><br><br>지금 당장 눈에 보이는 변화가 없더라도<br><strong>다시 서로를 찾게 될 가능성이 매우 높은 편</strong>이에요.",
+    good: "두 사람 사이에는 단순한 미련만이 아니라<br><strong>다시 관계를 회복할 수 있는 기반</strong>이 남아 있어요.<br><br>헤어진 뒤에도 상대의 감정을 존중하고<br><strong>관계를 완전히 망가뜨리지 않은 선택들</strong>이<br>특히 긍정적으로 작용했어요.",
+    bad: "이 정도로 서로에게 감정이 남아 있을 때는<br><strong>같은 문제로 다시 헤어지는 것을 조심</strong>해야 해요.<br><br>다시 만나는 것 자체보다<br><strong>'이번에는 무엇이 달라질 것인가'</strong>가<br>더 중요한 관계예요.",
+    tips: "재회를 서두르기보다<br><strong>두 사람이 헤어질 수밖에 없었던 원인을 먼저 해결</strong>해두세요.<br><br>다시 연락이 닿았을 때 예전 관계로 돌아가는 것이 아니라,<br><strong>조금 다른 관계를 시작한다는 마음</strong>으로 접근하는 것이 중요해요.<br><br>재회 가능성이 높은 만큼,<br><strong>다시 만난 뒤의 관계를 지켜내는 것</strong>이 더 중요합니다."
   }
 ];
 
@@ -1327,12 +1387,12 @@ function showResult() {
       if (n >= pct) clearInterval(iv);
     }, 22);
 
-    document.getElementById('result-title').textContent = res.title;
-    document.getElementById('result-desc').textContent = res.desc;
-    document.getElementById('result-good').textContent = res.good;
-    document.getElementById('result-bad').textContent = res.bad;
+    document.getElementById('result-title').innerHTML = res.title;
+    document.getElementById('result-desc').innerHTML = res.desc;
+    document.getElementById('result-good').innerHTML = res.good;
+    document.getElementById('result-bad').innerHTML = res.bad;
     const tl = document.getElementById('tips-list');
-    tl.innerHTML = `<p style="font-size:14px;color:var(--ink);line-height:1.9;font-weight:700;">${res.tips}</p>`;
+    tl.innerHTML = `<p style="font-size:14px;color:var(--ink);line-height:2.0;font-weight:400;word-break:keep-all;overflow-wrap:break-word;">${res.tips}</p>`;
 
     // 점수에 따라 아이콘 교체
     const icon = document.getElementById('result-icon');
